@@ -1,7 +1,4 @@
-﻿#function get-bbcnews {$bbc = invoke-restmethod -method get "https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=7679045016094e248c1bb713ce2d03e2"
-#$bbcoutput = $bbc.articles | Select title, description, publishedat
-#Write-Output $bbcoutput }
-
+﻿Import-Module C:\users\kramit\Documents\GitHub\Powershell-scripts\MyTwitter-master\MyTwitter.psm1
 
 function get-allsyria {
     $allnewssources = invoke-restmethod -method get "https://newsapi.org/v1/sources?language=en&apiKey=7679045016094e248c1bb713ce2d03e2"
@@ -21,18 +18,28 @@ function get-allsyria {
     $a
 }
 
-(get-allsyria).count
+$count = (get-allsyria).count
+
+$timeline = Get-TweetTimeline -Username "syriamessedup"
+
+$latesttweet = $timeline.text[0]
+
+if (($latesttweet) -match "\d+"){
+$yesterdaysnumber = $Matches[0]
+}
+
+if ($yesterdaysnumber -gt $count) {
+$moreorless = "less"
+} elseif ($yesterdaysnumber -eq $count) {
+$moreorless = "equally"
+} else {
+$moreorless = "less"
+}
 
 
 
 
+Send-Tweet -Message "$count Syria stories $moreorless messed up than before"
 
 
 
-#foreach ($line in (get-bbcnews).title ) {
-#
-#if ($line -like '*Syria*') {
-#Write-Host $line -ForegroundColor Magenta
-#}
-
-#}  

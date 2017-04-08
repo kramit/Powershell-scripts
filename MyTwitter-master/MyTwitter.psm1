@@ -144,16 +144,16 @@ Function New-MyTwitterConfiguration {
       param (
         [Parameter(Mandatory,
           HelpMessage='What is the Twitter Client API Key?')]
-        [string]$APIKey = "iavvH6Hw5ZWDLRLz8Rg8bpvNI",
+        [string]$APIKey,
         [Parameter(Mandatory,
           HelpMessage='What is the Twitter Client API Secret?')]
-        [string]$APISecret = "XSpvWCCn60s4Nc2k0fFLCJyn6AA9EvhY33RmzIbGs1uHreVnMN",
+        [string]$APISecret,
         [Parameter(Mandatory,
           HelpMessage='What is the Twitter Client Access Token?')]
-        [string]$AccessToken = "14797894-UzrRZLRrAT1AqvTbY2Wb72aKAxidB9zNKQxFd6caG",
+        [string]$AccessToken,
         [Parameter(Mandatory,
           HelpMessage='What is the Twitter Client Access Token Secret?')]
-		[string]$AccessTokenSecret = "qyjUz5qEtzKv1jcpkufhLml2r35D0fHfzbXvt7cOTbQAN",
+		[string]$AccessTokenSecret,
 		[switch]$Force
       )
 	begin {
