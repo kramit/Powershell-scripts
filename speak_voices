@@ -1,0 +1,22 @@
+
+Add-Type -AssemblyName System.Speech 
+ $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
+ $synth.rate = "0"
+ $synth.selectvoice( "Microsoft Hazel Desktop" )
+ $synth.Voice
+ $synth.GetInstalledVoices().voiceinfo
+
+
+
+ 
+
+ $synth2 = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
+ $synth2.rate = "0"
+ $synth2.GetInstalledVoices().voiceinfo
+
+
+
+
+  $synth.speak("hello I am speaking real english")
+  $synth2.speak("hello I am speaking Merica english")
+
