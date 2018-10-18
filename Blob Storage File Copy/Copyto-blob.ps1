@@ -5,10 +5,12 @@ $StorageUrl =
 $ctx = New-AzureStorageContext -StorageAccountName $StorageAccountName -StorageAccountKey $StorageAccountKey
 
 $ContainerName = '$web'
+
+#directoy for files to be uploaded
 $localFileDirectory = "C:\temppics\"
 
 $files = Get-ChildItem $localFileDirectory
-
+#loop to upload all files in dir, -file = name of the file -blob = name of the file on the blob store
 foreach ($file in $files.Name){
 $BlobName = $file
 $localFile = $localFileDirectory + $BlobName 
