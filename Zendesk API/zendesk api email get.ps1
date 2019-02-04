@@ -1,6 +1,11 @@
-﻿$username = ""
+#zendesk username
+$username = ""
 
+#zendesk api token
 $token = ""
+
+#outfile (txt)
+$outputfile = ""
 
 
 for ($i = 0; $i -lt 1; $i++)
@@ -22,6 +27,7 @@ Headers = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]
 $result = Invoke-RestMethod -Uri $params.Uri -Method $params.Method -Headers $params.Headers
 $emails += $result.users.email
 
+$emails | out-file -path $outputfile -append
 }
 
 #$emails | Measure-Object
