@@ -80,7 +80,7 @@ $WPFtextBox.text = "8.8.8.8"
 ## add the get net ip info
 function test-netip  {
 param($ip)
-Test-NetConnection -ComputerName $ip | Select-Object ComputerName, RemoteAddress, PingSucceeded                                                   
+Test-Connection -ComputerName $ip | select address, responsetime, ResponseTimeToLive                                             
 }
 
 
