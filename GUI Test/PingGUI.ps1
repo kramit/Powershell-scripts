@@ -19,9 +19,8 @@ $inputXML = @"
             <ListView x:Name="listView" HorizontalAlignment="Left" Height="135" Margin="249,192,0,0" VerticalAlignment="Top" Width="361">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ComputerName"/>
-                    <GridViewColumn Header="RemoteAddress"/>
-                    <GridViewColumn Header="PingSucceeded"/>
+                    <GridViewColumn Header="IPV4Address"  DisplayMemberBinding ="{Binding address}" Width="120"/>
+                    <GridViewColumn Header="responsetime" DisplayMemberBinding ="{Binding responsetime}" Width="120"/>                    
                 </GridView>
             </ListView.View>
         </ListView>
@@ -73,20 +72,26 @@ Get-FormVariables
 ##Change some names and sizes of elements
 $WPFbutton.Content = "Go Go IP Test" 
 $WPFbutton.Width = 100
-$WPFtextBlock.Text = "Enter the IP to Test"
-$WPFtextBox.text = "8.8.8.8"
+$WPFtextBlock.Text = "Enter the IP or URL to Test"
+$WPFtextBox.text = ""
 
 
-## add the get net ip info
+
+@{Name='ComputerName';Ex={$computername}}
+
+
+## add the get net ip info, the names of the selected properties have to match the bindings in the list in the XAML to bind
+## the prop item to the correct column in the listview
+
 function test-netip  {
 param($ip)
-Test-Connection -ComputerName $ip | select address, responsetime, ResponseTimeToLive                                             
+Test-Connection -ComputerName $ip | select @{Name='address';Ex={$_.IPV4Address}},@{Name='responsetime'; Ex={$_.responsetime}}                                         
 }
 
 
 ## add the function to the on click of the button populated by the contents of the textbox
 $WPFbutton.Add_Click({
-test-netip -ip $WPFtextBox.Text | % {$WPFlistView.AddText($_)}
+test-netip -ip $WPFtextBox.Text | % {$WPFlistView.AddChild($_)}
 })
 
 
