@@ -1,6 +1,13 @@
 ﻿ 
 #===========================================================================
 # XAML Created From Visual studio
+# In the GridView section must add the binding information for the columns
+# <GridViewColumn Header="IPV4Address" />      
+#
+# will become the below where the binding is related to the property that is being passed to the 
+# .addchild() method on the onclick method of the button
+#
+#<GridViewColumn Header="IPV4Address"  DisplayMemberBinding ="{Binding address}" Width="120"/>                   
 #===========================================================================
 $inputXML = @"
 <Window x:Class="WpfApp2.MainWindow"
@@ -10,22 +17,27 @@ $inputXML = @"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="326,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="82,52,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-2.466,-5.073"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="326,80,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="82,356,0,0" VerticalAlignment="Top" Width="75"/>
-            <ListView x:Name="listView" HorizontalAlignment="Left" Height="135" Margin="249,192,0,0" VerticalAlignment="Top" Width="361">
+        Title="MainWindow" Height="400" Width="600">
+        <Canvas Margin="0,0,5.556,0">
+        <Canvas.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.21"/>
+                <GradientStop Color="White" Offset="0.777"/>
+            </LinearGradientBrush>
+        </Canvas.Background>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-2.466,-5.073" Background="White" BorderBrush="#FF828790" Foreground="#FF042271" Height="24.373" Canvas.Left="44.127" Canvas.Top="83.032"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Canvas.Left="110" Canvas.Top="84.779"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="24.373" Canvas.Left="249.127" Canvas.Top="83.032"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="166.333" VerticalAlignment="Top" Width="269" Canvas.Left="44.127" Canvas.Top="125.407">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="IPV4Address"  DisplayMemberBinding ="{Binding address}" Width="120"/>
-                    <GridViewColumn Header="responsetime" DisplayMemberBinding ="{Binding responsetime}" Width="120"/>                    
+                <GridViewColumn Header="IPV4Address"  DisplayMemberBinding ="{Binding address}" Width="120"/>
+                <GridViewColumn Header="responsetime" DisplayMemberBinding ="{Binding responsetime}" Width="120"/> 
                 </GridView>
             </ListView.View>
         </ListView>
 
-    </Grid>
+    </Canvas>
 </Window>
 "@ 
    
@@ -70,9 +82,8 @@ Get-FormVariables
 #===========================================================================
 
 ##Change some names and sizes of elements
-$WPFbutton.Content = "Go Go IP Test" 
-$WPFbutton.Width = 100
-$WPFtextBlock.Text = "Enter the IP or URL to Test"
+$WPFbutton.Content = "Go" 
+$WPFbutton.Width = 50
 $WPFtextBox.text = ""
 
 
