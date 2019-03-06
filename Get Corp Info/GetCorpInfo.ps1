@@ -9,11 +9,7 @@ command uses CIM, so it will only work with computers where Windows
 Remote Management (WinRM) has been enabled and Windows Management
 Framework (WMF) 3.0 or later is installed.
 .PARAMETER ComputerName
-One or more computer names, as strings. IP addresses are not accepted.
-You should only use canonical names from Active Directory. This
-parameter accepts pipeline input. Computer names must be in the form
-LON-XXYY, where "XX" can be a 2- or 3-character designation, and 
-"YY" can be 1 or 2 digits.
+One or more computer names, as strings. 
 .EXAMPLE
  Get-Content names.txt | Get-CorpOSInfo
 This example assumes that names.txt includes one computer name per
