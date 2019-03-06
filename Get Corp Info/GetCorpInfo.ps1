@@ -29,7 +29,6 @@ This example retrieves information from one computer.
                    ValueFromPipelineByPropertyName=$True,
                    HelpMessage='One or more computer names')]
         [Alias('HostName')]
-        [ValidatePattern('LON-\w{2,3}\d{1,2}')]
         [string[]]$ComputerName
     )
 
