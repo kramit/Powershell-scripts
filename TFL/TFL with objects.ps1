@@ -4,8 +4,8 @@
 
 #hash table for authentication headers
 $headers = @{
-'api_key' = '268a2215ce1d7f7ba90a2fb474ce437e'
-'app_id'  = '430bca13'
+    'api_key' = '268a2215ce1d7f7ba90a2fb474ce437e'
+    'app_id'  = '430bca13'
 }
 
 #string for lines to be collected
@@ -24,10 +24,9 @@ $collection = @()
 
 #create a for loop to loop through each item in the data and make
 #an object from each item then add it to the array $collection
-for ($i = 0; $i -lt $lineinfo.Count; $i++)
-{ 
+for ($i = 0; $i -lt $lineinfo.Count; $i++) { 
   
-$collection += new-object psobject -property @{"Line Name"=($linenames[$i]);Status=($status[$i])}
+    $collection += new-object psobject -property @{"Line Name" = ($linenames[$i]); Status = ($status[$i])}
 
 }
 
@@ -54,17 +53,17 @@ TD {border-width: 1px;padding: 3px;border-style: solid;border-color: black; marg
 [xml]$html = $collection | ConvertTo-Html -fragment
 
 #check each row, skipping the TH header row
-for ($i=1;$i -le $html.table.tr.count-1;$i++) {
-  $class = $html.CreateAttribute("class")
-  #check the value of the last column and assign a class to the row
-  if (($html.table.tr[$i].td[-1] -as [string]) -match "good") {                                          
-    $class.value = "good"  
-    $html.table.tr[$i].Attributes.Append($class) | Out-Null
-  }
-  elseif (($html.table.tr[$i].td[-1] -as [string]) -notmatch "good") {                                               
-    $class.value = "bad"    
-    $html.table.tr[$i].Attributes.Append($class) | Out-Null
-  }
+for ($i = 1; $i -le $html.table.tr.count - 1; $i++) {
+    $class = $html.CreateAttribute("class")
+    #check the value of the last column and assign a class to the row
+    if (($html.table.tr[$i].td[-1] -as [string]) -match "good") {                                          
+        $class.value = "good"  
+        $html.table.tr[$i].Attributes.Append($class) | Out-Null
+    }
+    elseif (($html.table.tr[$i].td[-1] -as [string]) -notmatch "good") {                                               
+        $class.value = "bad"    
+        $html.table.tr[$i].Attributes.Append($class) | Out-Null
+    }
 }
 
 #create the final report from the innerxml which should be html code
@@ -76,7 +75,7 @@ $($html.innerxml)
 
 #put it all together
 ConvertTo-HTML -head $head  -PostContent "<br><hr><i>$(Get-date)</i>" -body $body | 
-Out-File .\report.html -Encoding ascii
+    Out-File .\report.html -Encoding ascii
 
 Invoke-Item .\report.html
 
