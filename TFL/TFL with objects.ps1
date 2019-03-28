@@ -37,14 +37,15 @@ $Head = @"
 <title> TFL Line status</title>
 <style>
 br {color: black;}
-h1 {color: blue;}
+h1 {color: blue; text-align: center;}
 hr {  display: block; border-width: 3px;}
 body { background-color:#f6f6f6; font-family:calibri; font-size:20x; margin:2px;}
-TABLE {border-width: 1px;border-style: solid;border-color: black;border-collapse: collapse;}
+TABLE {margin-left:auto; margin-right:auto; border-width: 1px;border-style: solid;border-color: black;border-collapse: collapse;}
 .good {background-color: #90ee90}
 .bad {background-color: red}
 TH {border-width: 1px;padding: 3px;border-style: solid;border-color: black;background-color: #34495e; color:#ffffff; margin:2px;}
 TD {border-width: 1px;padding: 3px;border-style: solid;border-color: black; margin:2px;}
+.footer {text-align: center}
 </style>
 "@
 
@@ -74,7 +75,7 @@ $($html.innerxml)
 "@
 
 #put it all together
-ConvertTo-HTML -head $head  -PostContent "<br><hr><i>$(Get-date)</i>" -body $body | 
+ConvertTo-HTML -head $head  -PostContent "<br><hr><div class=`"footer`"><i>$(Get-date)</i></div>" -body $body | 
     Out-File .\report.html -Encoding ascii
 
 Invoke-Item .\report.html
