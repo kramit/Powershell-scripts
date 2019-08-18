@@ -4,8 +4,9 @@ $bridge = [HueBridge]::new('192.168.178.33','d53L7R3O69fgOlJcK8l-dX-pv7KSimWKuka
 
 #$bridge.ToggleAllLights("on")
 
-$light = [HueLight]::new('Lounge','192.168.178.33','d53L7R3O69fgOlJcK8l-dX-pv7KSimWKukamAP0o')
+$light = [HueLight]::new('Lounge bulb','192.168.178.33','d53L7R3O69fgOlJcK8l-dX-pv7KSimWKukamAP0o')
 
+#this turns light $light on and off, need to be on for anything to work
 $light.SwitchHueLight()
 
 
