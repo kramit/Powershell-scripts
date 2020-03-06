@@ -17,7 +17,7 @@ function new-speech
     [string]$text
     )
 
- #set up .net object
+ #set up .net object for use
  Add-Type -AssemblyName System.Speech 
  $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
     
